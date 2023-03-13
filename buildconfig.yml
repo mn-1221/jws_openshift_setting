@@ -1,0 +1,21 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: jws-base-test-image-build
+  labels:
+    build: jws-base-test-image-build
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'jws-base-test-image:latest'
+  strategy:
+   sourceStrategy:
+     from:
+       kind: "ImageStreamTag"
+       name: "jboss-webserver56-openjdk8-tomcat9-openshift-ubi8:latest"
+      scripts: "https://github.com/mn-1221/jws_openshift_setting" 
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/y0k0yama/jws_base_test_image.git'
